@@ -1,0 +1,49 @@
+import numpy as np 
+
+
+def posibilidad(matriz, pos):
+    if pos > len(matriz):
+        print("no se puede encontrar la probabilidad") 
+    else: 
+        matriz = norma(matriz)
+        return mod(matriz[pos])
+
+def mod(a):
+    return np.abs(a)**2
+
+def norma(x):
+    acum = 0 
+    for i in range(len(x)):
+        acum += mod(x[i])
+    acum = acum ** 0.5
+    for i in range(len(x)):
+        x[i] /= acum
+        
+    return x
+
+def posibilidad2(matriz, matriz2): 
+    x  = norma(matriz)
+    y  = norma(matriz2)
+
+    if len(x) != len(y):
+        print("no se puede encontrar la probabilidad") 
+    else: 
+        prodinter= np.dot(x, np.conj(y))
+    
+        prob = np.abs(prodinter)**2
+    
+        return prob
+
+        
+def main():
+    matriz = np.array([[3j],[2+8j],[3+5j]])
+    pos = 0
+    print("la posibilidad en posicion 0 es: ", posibilidad(matriz,pos)) 
+
+    matriz2 = np.array([[4+5j],[20-8j],[3+15j]])
+
+    x=  np.array([[4+5j],[20-8j],[3+15j]])
+
+    print("posibilidad de dos matrices es:" , posibilidad2(matriz,matriz2)) 
+          
+main()
